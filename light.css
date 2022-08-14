@@ -1,0 +1,32 @@
+:root {
+    --body_color: #faebd4;
+    --btn_color: #6AAF3F;
+}
+
+body{
+    background-color: var(--body_color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div{
+    width: 200px;
+    height: 140px;
+}
+  
+
+button {
+    border-radius: .5em;
+    font-size: 1.3em;
+}
+
+.button-2{
+    background-color:  var(--btn_color);
+}
+.button-2.button-space{
+    margin-left: 15px;
+}
+
+h3 {
+    margin-bottom: 0px;
+    margin-left: 15px;
+}
