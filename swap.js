@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var tab = tabs[0];
 
             // only works if the tab is in the Admin side. Does nothing if on dashboard already
-            if (tab.url.includes('neprofile_admin')){
+            if (tab.url.includes('neprofile_admin/profiles')){
 
                 // if the profile is on the "all attributes" tab, go to the "info" tab on dashboard
                 if (tab.url.includes('attributes'))
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var tab = tabs[0];
             
             // only works if the tab is in the Dashboard side. Does nothing if on admin already
-            if (tab.url.includes('neprofile_dashboard')){
+            if (tab.url.includes('neprofile_dashboard/profiles')){
 
                 // check if its on the info, contributors, or history profile pages
                 // goes to admin side of current page
@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', function() {
             var tab = tabs[0];
 
             // only works if the tab is in the Admin side. Does nothing if on dashboard already
-            if (tab.url.includes('neprofile_admin')){
+            if (tab.url.includes('neprofile_admin/requests')){
 
                 // split url up for manipulation later
                 var splitURL= tab.url.split('/')
 
                 // gets the workflow ID and session ID from the sessionStorage
-                // if sessionStorage is empty, returnns null
+                // if sessionStorage is empty, returns null
                 var workflowID=sessionStorage.getItem("workflowID"+tab.id)
                 var sessionID=sessionStorage.getItem("sessionID"+tab.id)
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var tab = tabs[0];
 
             // only works if the tab is in the Dashboard side. Does nothing if on admin already
-            if (tab.url.includes('neprofile_dashboard')){
+            if (tab.url.includes('neprofile_dashboard/requests')){
                 
                 // split url up for manipulation later
                 var splitURL= tab.url.split('/')
