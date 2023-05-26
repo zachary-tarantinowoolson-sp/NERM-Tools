@@ -18,10 +18,11 @@
     "permissions": [
         "tabs",
         "storage",
-        "activeTab"
+        "activeTab",
+        "scripting"
     ],
     "content_scripts":[{
-      "js":["swap.js"],
+      "js":["tools.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_end"
     }]
