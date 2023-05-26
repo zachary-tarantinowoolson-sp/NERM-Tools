@@ -1,7 +1,7 @@
 {
-    "name": "NERM Tool",
-    "version": "1.0.2",
-    "description": "Swaps Profile pages between Admin and Dashboard",
+    "name": "NERM Tools",
+    "version": "1.1.0",
+    "description": "Tools to assist with troubleshotting in NERM",
     "manifest_version": 3,
     "author": "Zachary Tarantino",
     "icons": {

@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var btnProfileAdmin= document.getElementById("profileadmin");
     var btnSessionDash= document.getElementById("sessiondash");
     var btnSessionAdmin= document.getElementById("sessionadmin");
+    var btnshowNav= document.getElementById("showNav");
+    var btnhideNav= document.getElementById("hideNav");
 
     /* --- listeners for button presses --- */
     // profile - Dashboard
@@ -23,6 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // session - Admin
     btnSessionAdmin.addEventListener("click", function(){
         goToSessionAdmin();
+    });
+    // Show the left Navigation panel
+    btnshowNav.addEventListener("click", function(){
+        showNavBar();
+    });
+    // Hide the left Navigation panel
+    btnhideNav.addEventListener("click", function(){
+        hideNavBar();
     });
 
 
@@ -137,4 +147,54 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Show Nav Bar
+    function showNavBar(){
+        // grab active tab
+        chrome.tabs.query({active:true,lastFocusedWindow:true},function(tabs){
+            // set current tab to var
+            var tab = tabs[0];
+
+            chrome.scripting.removeCSS({
+                target: {tabId:tab.id},
+                files:["hideNav.css"]
+            });
+
+            // remove ids from storage
+            sessionStorage.removeItem("cssInjected"+tab.id)
+        });
+    }
+
+    // Hide Nav Bar
+    function hideNavBar(){
+        // grab active tab
+        chrome.tabs.query({active:true,lastFocusedWindow:true},function(tabs){
+            // set current tab to var
+            var tab = tabs[0];
+            var isHidden=sessionStorage.getItem("cssInjected"+tab.id)
+
+            if(isHidden==null){
+                chrome.scripting.insertCSS({
+                    target: {tabId:tab.id, allFrames:true},
+                    files:["hideNav.css"]
+                });
+
+                var cssInjected="NavIsHidden"
+
+                // save item to session storage
+                sessionStorage.setItem("cssInjected"+tab.id,cssInjected)
+            }
+        });
+    }
+
+    // adds a listener to tab change
+    chrome.tabs.onUpdated.addListener((tabId,changeInfo,tab)=>{
+
+        // check for a URL in the changeInfo parameter (url is only added when it is changed)
+        if(changeInfo.url){
+            // remove IDs from storage
+            sessionStorage.removeItem("cssInjected"+tab.id)
+        }
+    });
+
 });
