@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // variables for html buttons
     var btnProfileDash= document.getElementById("profiledash");
     var btnProfileAdmin= document.getElementById("profileadmin");
+    var btnSAASTRIAGEJira= document.getElementById("triageJira");
+    var btnSAASTRIAGEPortal= document.getElementById("triagePortal");
     var btnSessionDash= document.getElementById("sessiondash");
     var btnSessionAdmin= document.getElementById("sessionadmin");
     var btnshowNav= document.getElementById("showNav");
@@ -17,6 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // profile - Admin
     btnProfileAdmin.addEventListener("click", function(){
         goToProfileAdmin();
+    });
+    // SaaSTriage - Jira
+    btnSAASTRIAGEJira.addEventListener("click", function(){
+        goToTriageJira();
+    });
+    // SaaSTriage - Portal
+    btnSAASTRIAGEPortal.addEventListener("click", function(){
+        goToTriagePortal();
     });
     // session - Dashboard
     btnSessionDash.addEventListener("click", function(){
@@ -77,6 +87,36 @@ document.addEventListener('DOMContentLoaded', function() {
                     chrome.tabs.update({url:tab.url.replace(/neprofile_dashboard/,"neprofile_admin")})
                 else // otherwise, go to the info page in admin
                     chrome.tabs.update({url:tab.url.split("parent")[0].replace(/neprofile_dashboard/,"neprofile_admin")})
+            }
+        });
+    }
+
+    /* --- SAASTRIAGE functions --- */
+
+    // SaaSTriage - Jira
+    function goToTriageJira()
+    {
+        // grabs active tab
+        chrome.tabs.query({active: true, lastFocusedWindow: true}, function(tabs) 
+        {  
+            // set current tab to variable
+            var tab = tabs[0];
+            if (tab.url.includes('servicedesk/customer/portal/3')){
+                chrome.tabs.update({url:tab.url.replace(/servicedesk\/customer\/portal\/3/,"browse")})
+            }            
+        });
+    }
+
+    // SaaSTriage - Portal
+    function goToTriagePortal()
+    {
+        // grabs active tab
+        chrome.tabs.query({active: true, lastFocusedWindow: true}, function(tabs) 
+        {
+            // set current tab to variable
+            var tab = tabs[0];
+            if (tab.url.includes('browse')){
+                chrome.tabs.update({url:tab.url.replace(/browse/,"servicedesk/customer/portal/3")})
             }
         });
     }
